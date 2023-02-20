@@ -1,0 +1,110 @@
+<body>
+  <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+document.body.style.backgroundColor = 'black';
+
+var numCircles = 100;
+var circleSize = 10;
+var circleSpacing = circleSize * 2;
+var numRows = Math.ceil(window.innerHeight / circleSpacing);
+var numCols = Math.ceil(window.innerWidth / circleSpacing);
+for (var row = 0; row < numRows; row++) {
+  for (var col = 0; col < numCols; col++) {
+    var circle = document.createElement('div');
+    circle.style.position = 'absolute';
+    circle.style.top = row * circleSpacing + 'px';
+    circle.style.left = col * circleSpacing + 'px';
+    circle.style.width = circleSize + 'px';
+    circle.style.height = circleSize + 'px';
+    circle.style.borderRadius = '50%';
+    circle.style.backgroundColor = 'white';
+    document.body.appendChild(circle);
+  }
+}
+
+var circles = document.getElementsByTagName('div');
+for (var i = 0; i < circles.length; i++) {
+  var circle = circles[i];
+  var x = parseInt(circle.style.left) + circleSize / 2;
+  var y = parseInt(circle.style.top) + circleSize / 2;
+  var distance = Math.sqrt(Math.pow(x - window.innerWidth / 2, 2) + Math.pow(y - window.innerHeight / 2, 2));
+  var hue = distance / Math.sqrt(Math.pow(window.innerWidth / 2, 2) + Math.pow(window.innerHeight / 2, 2)) * 360;
+  circle.style.backgroundColor = 'hsl(' + hue + ', 100%, 50%)';
+}
+
+var circles = document.getElementsByTagName('div');
+for (var i = 0; i < circles.length; i++) {
+  var circle = circles[i];
+  var x = parseInt(circle.style.left) + circleSize / 2;
+  var y = parseInt(circle.style.top) + circleSize / 2;
+  var distance = Math.sqrt(Math.pow(x - window.innerWidth / 2, 2) + Math.pow(y - window.innerHeight / 2, 2));
+  var hue = distance / Math.sqrt(Math.pow(window.innerWidth / 2, 2) + Math.pow(window.innerHeight / 2, 2)) * 360;
+  circle.style.backgroundColor = 'hsl(' + hue + ', 100%, 50%)';
+  circle.hue = hue;
+}
+setInterval(function() {
+  for (var i = 0; i < circles.length; i++) {
+    var circle = circles[i];
+    circle.hue = (circle.hue + 1) % 360;
+    circle.style.backgroundColor = 'hsl(' + circle.hue + ', 100%, 50%)';
+  }
+}, 10);
+
+var circles = document.getElementsByTagName('div');
+for (var i = 0; i < circles.length; i++) {
+  var circle = circles[i];
+  var x = parseInt(circle.style.left) + circleSize / 2;
+  var y = parseInt(circle.style.top) + circleSize / 2;
+  var distance = Math.sqrt(Math.pow(x - window.innerWidth / 2, 2) + Math.pow(y - window.innerHeight / 2, 2));
+  var hue = distance / Math.sqrt(Math.pow(window.innerWidth / 2, 2) + Math.pow(window.innerHeight / 2, 2)) * 360;
+  circle.style.backgroundColor = 'hsl(' + hue + ', 100%, 50%)';
+  circle.hue = hue;
+  circle.scale = 1;
+  circle.scaleDirection = 1;
+}
+setInterval(function() {
+  for (var i = 0; i < circles.length; i++) {
+    var circle = circles[i];
+    circle.hue = (circle.hue + 1) % 360;
+    circle.style.backgroundColor = 'hsl(' + circle.hue + ', 100%, 50%)';
+    circle.scale += circle.scaleDirection * 0.01;
+    if (circle.scale > 1.5) {
+      circle.scaleDirection = -1;
+    } else if (circle.scale < 0.5) {
+      circle.scaleDirection = 1;
+    }
+    circle.style.transform = 'scale(' + circle.scale + ')';
+  }
+}, 10);
+
+var circles = document.getElementsByTagName('div');
+for (var i = 0; i < circles.length; i++) {
+  var circle = circles[i];
+  var x = parseInt(circle.style.left) + circleSize / 2;
+  var y = parseInt(circle.style.top) + circleSize / 2;
+  var distance = Math.sqrt(Math.pow(x - window.innerWidth / 2, 2) + Math.pow(y - window.innerHeight / 2, 2));
+  var hue = distance / Math.sqrt(Math.pow(window.innerWidth / 2, 2) + Math.pow(window.innerHeight / 2, 2)) * 360;
+  circle.style.backgroundColor = 'hsl(' + hue + ', 100%, 50%)';
+  circle.hue = hue;
+  circle.scale = 1;
+  circle.scaleDirection = 1;
+  circle.scaleSpeed = Math.random() * 0.1 + 0.05;
+}
+setInterval(function() {
+  for (var i = 0; i < circles.length; i++) {
+    var circle = circles[i];
+    circle.hue = (circle.hue + 1) % 360;
+    circle.style.backgroundColor = 'hsl(' + circle.hue + ', 100%, 50%)';
+    circle.scale += circle.scaleDirection * circle.scaleSpeed;
+    if (circle.scale > 1.5) {
+      circle.scaleDirection = -1;
+    } else if (circle.scale < 0.5) {
+      circle.scaleDirection = 1;
+    }
+    circle.style.transform = 'scale(' + circle.scale + ')';
+  }
+}, 10);
+});
+  </script>
+</body>
