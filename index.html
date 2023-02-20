@@ -3,15 +3,14 @@
         document.addEventListener("DOMContentLoaded", function() {
 
 document.body.style.backgroundColor = 'black';
-
-var numCircles = 100;
-var circleSize = 10;
-var circleSpacing = circleSize * 2;
-var numRows = Math.ceil(window.innerHeight / circleSpacing);
-var numCols = Math.ceil(window.innerWidth / circleSpacing);
-for (var row = 0; row < numRows; row++) {
-  for (var col = 0; col < numCols; col++) {
-    var circle = document.createElement('div');
+          
+let circleSize = 10;
+let circleSpacing = circleSize * 2;
+let numRows = Math.ceil(window.innerHeight / circleSpacing);
+let numCols = Math.ceil(window.innerWidth / circleSpacing);
+for (let row = 0; row < numRows; row++) {
+  for (let col = 0; col < numCols; col++) {
+    let circle = document.createElement('div');
     circle.style.position = 'absolute';
     circle.style.top = row * circleSpacing + 'px';
     circle.style.left = col * circleSpacing + 'px';
@@ -23,77 +22,59 @@ for (var row = 0; row < numRows; row++) {
   }
 }
 
-var circles = document.getElementsByTagName('div');
-for (var i = 0; i < circles.length; i++) {
-  var circle = circles[i];
-  var x = parseInt(circle.style.left) + circleSize / 2;
-  var y = parseInt(circle.style.top) + circleSize / 2;
-  var distance = Math.sqrt(Math.pow(x - window.innerWidth / 2, 2) + Math.pow(y - window.innerHeight / 2, 2));
-  var hue = distance / Math.sqrt(Math.pow(window.innerWidth / 2, 2) + Math.pow(window.innerHeight / 2, 2)) * 360;
-  circle.style.backgroundColor = 'hsl(' + hue + ', 100%, 50%)';
-}
-
-var circles = document.getElementsByTagName('div');
-for (var i = 0; i < circles.length; i++) {
-  var circle = circles[i];
-  var x = parseInt(circle.style.left) + circleSize / 2;
-  var y = parseInt(circle.style.top) + circleSize / 2;
-  var distance = Math.sqrt(Math.pow(x - window.innerWidth / 2, 2) + Math.pow(y - window.innerHeight / 2, 2));
-  var hue = distance / Math.sqrt(Math.pow(window.innerWidth / 2, 2) + Math.pow(window.innerHeight / 2, 2)) * 360;
-  circle.style.backgroundColor = 'hsl(' + hue + ', 100%, 50%)';
-  circle.hue = hue;
-}
-setInterval(function() {
-  for (var i = 0; i < circles.length; i++) {
-    var circle = circles[i];
-    circle.hue = (circle.hue + 1) % 360;
-    circle.style.backgroundColor = 'hsl(' + circle.hue + ', 100%, 50%)';
-  }
-}, 10);
-
-var circles = document.getElementsByTagName('div');
-for (var i = 0; i < circles.length; i++) {
-  var circle = circles[i];
-  var x = parseInt(circle.style.left) + circleSize / 2;
-  var y = parseInt(circle.style.top) + circleSize / 2;
-  var distance = Math.sqrt(Math.pow(x - window.innerWidth / 2, 2) + Math.pow(y - window.innerHeight / 2, 2));
-  var hue = distance / Math.sqrt(Math.pow(window.innerWidth / 2, 2) + Math.pow(window.innerHeight / 2, 2)) * 360;
-  circle.style.backgroundColor = 'hsl(' + hue + ', 100%, 50%)';
-  circle.hue = hue;
-  circle.scale = 1;
-  circle.scaleDirection = 1;
-}
-setInterval(function() {
-  for (var i = 0; i < circles.length; i++) {
-    var circle = circles[i];
-    circle.hue = (circle.hue + 1) % 360;
-    circle.style.backgroundColor = 'hsl(' + circle.hue + ', 100%, 50%)';
-    circle.scale += circle.scaleDirection * 0.01;
-    if (circle.scale > 1.5) {
-      circle.scaleDirection = -1;
-    } else if (circle.scale < 0.5) {
-      circle.scaleDirection = 1;
-    }
-    circle.style.transform = 'scale(' + circle.scale + ')';
-  }
-}, 10);
-
-var circles = document.getElementsByTagName('div');
-for (var i = 0; i < circles.length; i++) {
-  var circle = circles[i];
-  var x = parseInt(circle.style.left) + circleSize / 2;
-  var y = parseInt(circle.style.top) + circleSize / 2;
-  var distance = Math.sqrt(Math.pow(x - window.innerWidth / 2, 2) + Math.pow(y - window.innerHeight / 2, 2));
-  var hue = distance / Math.sqrt(Math.pow(window.innerWidth / 2, 2) + Math.pow(window.innerHeight / 2, 2)) * 360;
+let circles = document.getElementsByTagName('div');
+for (let i = 0; i < circles.length; i++) {
+  let circle = circles[i];
+  let x = parseInt(circle.style.left) + circleSize / 2;
+  let y = parseInt(circle.style.top) + circleSize / 2;
+  let distance = Math.sqrt(Math.pow(x - window.innerWidth / 2, 2) + Math.pow(y - window.innerHeight / 2, 2));
+  let hue = distance / Math.sqrt(Math.pow(window.innerWidth / 2, 2) + Math.pow(window.innerHeight / 2, 2)) * 360;
   circle.style.backgroundColor = 'hsl(' + hue + ', 100%, 50%)';
   circle.hue = hue;
   circle.scale = 1;
   circle.scaleDirection = 1;
   circle.scaleSpeed = Math.random() * 0.1 + 0.05;
 }
+let squares = [];
+for (let i = 0; i < 5; i++) {
+  let square = document.createElement('div');
+  square.style.position = 'absolute';
+  square.style.width = '.01px';
+  square.style.height = '.01px';
+  square.style.transparent = 'true';
+  square.x = Math.random() * window.innerWidth;
+  square.y = Math.random() * window.innerHeight;
+  square.xDirection = 1;
+  square.yDirection = 1;
+  square.xSpeed = Math.random() * 5 + 1;
+  square.ySpeed = Math.random() * 5 + 1;
+  document.body.appendChild(square);
+  squares.push(square);
+}
 setInterval(function() {
-  for (var i = 0; i < circles.length; i++) {
-    var circle = circles[i];
+  for (let i = 0; i < squares.length; i++) {
+    let square = squares[i];
+    square.x += square.xDirection * square.xSpeed;
+    square.y += square.yDirection * square.ySpeed;
+    if (square.x < 0) {
+      square.x = 0;
+      square.xDirection = 1;
+    } else if (square.x > window.innerWidth - 10) {
+      square.x = window.innerWidth - 10;
+      square.xDirection = -1;
+    }
+    if (square.y < 0) {
+      square.y = 0;
+      square.yDirection = 1;
+    } else if (square.y > window.innerHeight - 10) {
+      square.y = window.innerHeight - 10;
+      square.yDirection = -1;
+    }
+    square.style.left = square.x + 'px';
+    square.style.top = square.y + 'px';
+  }
+  for (let i = 0; i < circles.length; i++) {
+    let circle = circles[i];
     circle.hue = (circle.hue + 1) % 360;
     circle.style.backgroundColor = 'hsl(' + circle.hue + ', 100%, 50%)';
     circle.scale += circle.scaleDirection * circle.scaleSpeed;
@@ -103,6 +84,15 @@ setInterval(function() {
       circle.scaleDirection = 1;
     }
     circle.style.transform = 'scale(' + circle.scale + ')';
+    let x = parseInt(circle.style.left) + circleSize / 2;
+    let y = parseInt(circle.style.top) + circleSize / 2;
+    for (let j = 0; j < squares.length; j++) {
+      let square = squares[j];
+      let distance = Math.sqrt(Math.pow(x - square.x - 5, 2) + Math.pow(y - square.y - 5, 2));
+      if (distance > 30 && distance < 100) {
+        circle.style.backgroundColor = 'black';
+      }
+    }
   }
 }, 10);
 });
